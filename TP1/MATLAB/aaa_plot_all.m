@@ -46,6 +46,10 @@ end
 G_phase_margin(spice_directory, fullfile('simulaciones', 'Loop'), ... % Check.
     images_directory, false);
 
+
+G_phase_margin_2(spice_directory, fullfile('simulaciones', 'Loop'), ... % Check.
+    images_directory, false);
+
 % G_power_BW_sim(spice_directory, fullfile('simulaciones', 'BW'), ... % Check.
 %     images_directory, false);
 % 

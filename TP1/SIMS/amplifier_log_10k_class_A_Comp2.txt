@@ -1,0 +1,52 @@
+Circuit: * E:\WDATA\Facultad\Materias\Seminario de audio profesional\CLASES VIRTUALES\TPS\REPO\TP1\SIMS\amplifier.asc
+
+Warning: Multiple definitions of model "2n3906" Type: BJT
+Warning: Multiple definitions of model "2n3904" Type: BJT
+Direct Newton iteration for .op point succeeded.
+N-Period=4
+Fourier components of V(out)
+DC component:-0.0038587
+
+Harmonic	Frequency	 Fourier 	Normalized	 Phase  	Normalized
+ Number 	  [Hz]   	Component	 Component	[degree]	Phase [deg]
+    1   	1.000e+04	4.502e+01	1.000e+00	   -0.56°	    0.00°
+    2   	2.000e+04	4.429e-04	9.839e-06	  -65.24°	  -64.68°
+    3   	3.000e+04	2.319e-03	5.152e-05	  -93.94°	  -93.38°
+    4   	4.000e+04	3.036e-05	6.744e-07	  174.06°	  174.63°
+    5   	5.000e+04	1.900e-04	4.221e-06	  -94.04°	  -93.47°
+    6   	6.000e+04	2.113e-05	4.694e-07	   -9.95°	   -9.39°
+    7   	7.000e+04	7.665e-05	1.703e-06	   82.38°	   82.94°
+    8   	8.000e+04	1.351e-05	3.000e-07	  167.20°	  167.77°
+    9   	9.000e+04	3.751e-05	8.333e-07	 -100.97°	 -100.41°
+   10   	1.000e+05	7.389e-06	1.641e-07	  -13.29°	  -12.73°
+Total Harmonic Distortion: 0.005266%(0.005233%)
+
+
+
+vrms: RMS(v(out))=31.83296565 FROM 0.0005 TO 0.02
+pout: AVG(v(out)*i(rl))=126.6672128 FROM 0.0005 TO 0.02
+vout_max: MAX(v(out))=45.01534646 FROM 0 TO 0.02
+vin_max: MAX(v(in))=2.237502148 FROM 0 TO 0.02
+gain: (vout_max/vin_max)=20.11857128
+gain_db: 20*log10(vout_max/vin_max)=26.07194272
+pin: AVG(-v(vcc)*i(v3) + v(vss)*i(v4))=286.6241795 FROM 0.0005 TO 0.02
+efficiency: (100*pout/pin)=44.19278686
+
+
+Date: Mon Jun 15 01:34:56 2020
+Total elapsed time: 27.959 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 410064
+traniter = 410050
+tranpoints = 205025
+accept = 205025
+rejected = 0
+matrix size = 55
+fillins = 52
+solver = Alternate
+Matrix Compiler1: 8.90 KB object code size  11.3/8.1/[5.2]
+Matrix Compiler2: 6.90 KB object code size  4.9/6.9/[3.9]
+
