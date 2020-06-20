@@ -1,5 +1,50 @@
 
-Se hizo inicialmente un cálculo rápido de los valores necesarios para los resistores para lograr el punto Q requerido, luego se refinaron por simulación estos valores, para finalmente llevar a valores comerciales de la serie \textbf{E24} (5 \%) o \textbf{E96} (1 \%), figura~\figref{fig:fig_q_point}. Se utilizaron los de la serie al 1 \% para aquellos resistores que deben estar apareados (espejo de corriente) y para aquellos resistores que fijan la polarización o forman parte de la red de realimentación, en este último caso, también deberían utilizarse resistores de film de óxido metálico, por ser los resistores con mayor estabilidad en el tiempo, menor variación térmica y bajo nivel de ruido. En el cuadro~\tableref{table:table_resistors} se muestran los resistores seleccionados y su tipo, y en el cuadro~\tableref{table:table_qpoint} se resumen los valores de polarización finalmente obtenidos al usar los valores comerciales. \\
+Se hizo inicialmente un cálculo rápido de los valores necesarios para los resistores para lograr el punto Q requerido, luego se refinaron por simulación estos valores, para finalmente llevar a valores comerciales de la serie \textbf{E24} (5 \%) o \textbf{E96} (1 \%), figura~\figref{fig:fig_q_point}. Se utilizaron los de la serie al 1 \% para aquellos resistores que deben estar apareados (espejo de corriente) y para aquellos resistores que fijan la polarización o forman parte de la red de realimentación, en este último caso, también deberían utilizarse resistores de film de óxido metálico, por ser los resistores con mayor estabilidad en el tiempo, menor variación térmica y bajo nivel de ruido. En el cuadro~\tableref{table:table_resistors} se muestran los resistores seleccionados y su tipo, y en el cuadro~\tableref{table:table_qpoint} se resumen los valores de polarización finalmente obtenidos al usar los valores comerciales. \\ \\
+
+
+Los cálculos preliminares de los resistores se detallan a continuación:\\
+
+
+Para establecer una corriente de colector de $2 \si[per-mode=symbol]{\milli\ampere}$ en cada transistor del par diferencial LTP (long tail pair), necesitamos que la fuente de corriente imponga $4 \si[per-mode=symbol]{\milli\ampere}$, de manera que esta se reparta en partes iguales en los transistores del par, entonces asumiendo que $V_{BE_{5}} \approx 0.7 \si[per-mode=symbol]{\volt}$, y los $1.7 \si[per-mode=symbol]{\volt}$, impuestos posiblemente por unos diodos en serie o un LED, tenemos entonces para $R_{4}$:
+
+\begin{equation*}
+R_{4} = \frac{1.7 \si[per-mode=symbol]{\volt} - V_{BE_{5}}}{I_{C_{Q_{5}}}} \approx \frac{1.7 \si[per-mode=symbol]{\volt} - 0.7 \si[per-mode=symbol]{\volt}}{4 \si[per-mode=symbol]{\milli\ampere}} = \frac{1 \si[per-mode=symbol]{\volt}}{4 \si[per-mode=symbol]{\milli\ampere}} = 250 \si[per-mode=symbol]{\ohm}
+\end{equation*}
+
+Similarmente para $R_{6}$, tenemos
+
+
+\begin{equation*}
+R_{6} = \frac{1.7 \si[per-mode=symbol]{\volt} - V_{BE_{8}}}{I_{C_{Q_{8}}}} \approx \frac{1.7 \si[per-mode=symbol]{\volt} - 0.7 \si[per-mode=symbol]{\volt}}{6 \si[per-mode=symbol]{\milli\ampere}} = \frac{1 \si[per-mode=symbol]{\volt}}{6 \si[per-mode=symbol]{\milli\ampere}} \approx 167 \si[per-mode=symbol]{\ohm}
+\end{equation*}
+
+
+Para $R_{5}$, tenemos que por la misma circula $I_{{C_{Q_{6}}}}$, despreciando $I_{{B_{Q_{7}}}}$, tenemos entonces:
+
+
+\begin{equation*}
+R_{5} \approx \frac{V_{BE_{7}}}{I_{{C_{Q_{6}}}}} = \frac{V_{BE_{7}}}{700 \si[per-mode=symbol]{\micro\ampere}} \approx \frac{0.7 \si[per-mode=symbol]{\volt}}{700 \si[per-mode=symbol]{\micro\ampere}} \approx 1 \si[per-mode=symbol]{\kilo\ohm}
+\end{equation*}\\
+
+
+Con esto quedan determinados los valores preliminares para los resistores $R_{4}$, $R_{5}$ y $R_{6}$, en base a las corrientes de polarización de diseño, luego para los resistores de la red de realimentación, tenemos que su relación debe imponer la ganancia en $26 \si[per-mode=symbol]{\decibel}$, es decir aproximadamente \num{20} en veces, entonces esta es la relación de atenuación que debe tener el divisor resistivo de la red de realimentación, formado por $R_{F_{1}}$ y $R_{F_{2}}$, falta determinar entonces uno de ellos para fijar ambos valores. El resistor $R_{3}$, que se coloca para compensar el offset generado por la caída de tensión que causan las corrientes de base de los transistores del par diferencial, debe para cumplir esto, ser igual en valor a $R_{F_{1}}$, y dado que además $R_{3}$ impondrá la resistencia de entrada del amplificador, esto es por tener el par diferencial una alta impedancia de entrada, a causa de la fuente de corriente que lo polariza, se selecciona el valor de $R_{F_{1}}$ y $R_{3}$ en un valor razonable para la resistencia de entrada, se elige entonces:
+
+\begin{equation*}
+R_{F_{1}} = R_{3} = 10 \si[per-mode=symbol]{\kilo\ohm}
+\end{equation*}\\\\
+
+
+Entonces para $R_{F_{2}}$ tenemos:
+
+
+\begin{equation*}
+\frac{R_{F_{2}}}{R_{F_{1}} + R_{F_{2}}} = \frac{1}{20} \longrightarrow R_{F_{2}} = \frac{R_{F_{1}}}{19} = \frac{10 \si[per-mode=symbol]{\kilo\ohm}}{19} \approx 526 \si[per-mode=symbol]{\ohm}
+\end{equation*}\\\\
+
+Con eso tenemos valores preliminares para todos los resistores, ahora simplemente se introducen en la simulación estos valores, junto a un valor inicial para el "multiplicador de $V_{BE}$", de $2.8 \si[per-mode=symbol]{\volt}$, correspondiente a cuatro $V_{BE}$ de aproximadamente $0.7 \si[per-mode=symbol]{\volt}$. En la simulación del punto de reposo se ajustan los valores de los resistores, logrando con facilidad que las corrientes de reposo se acerquen a las de diseño en al menos dos decimales de precisión, y finalmente elegimos los valores mas cercanos de las series correspondientes. \\
+Para ajustar $R_{F_{2}}$ se mide la ganancia del amplificador, ajustando fino, para lograr los $26 \si[per-mode=symbol]{\decibel}$, y al igual que antes se lleva este valor al valor comercial mas cercano en la serie del $1 \si[per-mode=symbol]{\percent}$.
+
+
 
 
 \vfill
